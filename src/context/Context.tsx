@@ -22,8 +22,7 @@ export type TableContextType = {
   createItems: (count: number, newId?: number) => Cell[];
   setItems: Dispatch<SetStateAction<Cell[]>>;
   setShowTable: Dispatch<SetStateAction<boolean>>;
-  showCloseNumber: Function;
-  hideCloseNumber: Function;
+  showCloseNumber: (cell: Cell) => void;
   showTable: boolean;
   isIncludedCell: (id: number) => boolean;
 };

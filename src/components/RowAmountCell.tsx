@@ -13,8 +13,7 @@ export const RowAmountCell = ({
   showPercent,
   rowSum,
 }: RowAmountCellProps) => {
-  const { increase, showCloseNumber, isIncludedCell, hideCloseNumber } =
-    useTableData();
+  const { increase, showCloseNumber, isIncludedCell } = useTableData();
   const percent = Math.floor(fixedNumber(cell.amount / rowSum, 2) * 100);
 
   const style = {
