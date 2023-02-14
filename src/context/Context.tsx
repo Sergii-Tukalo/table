@@ -23,6 +23,7 @@ export type TableContextType = {
   setItems: Dispatch<SetStateAction<Cell[]>>;
   setShowTable: Dispatch<SetStateAction<boolean>>;
   showCloseNumber: Function;
+  hideCloseNumber: Function;
   showTable: boolean;
   isIncludedCell: (id: number) => boolean;
 };
@@ -47,7 +48,7 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
     });
 
   const showCloseNumber = (cell: Cell) => {
-    const copy = [...items];
+    const copy = items.filter((item) => item.id !== cell.id);
     const sortedCells = copy.sort((a, b) => {
       return (
         Math.abs(cell.amount - a.amount) - Math.abs(cell.amount - b.amount)
@@ -110,6 +111,7 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
     addRow,
     showCloseNumber,
     isIncludedCell,
+    hideCloseNumber,
   };
 
   return (
