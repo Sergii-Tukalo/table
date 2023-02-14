@@ -54,7 +54,7 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
         Math.abs(cell.amount - a.amount) - Math.abs(cell.amount - b.amount)
       );
     });
-    const slicedIds = sortedCells.slice(1, 5).map((item) => item.id);
+    const slicedIds = sortedCells.slice(0, 5).map((item) => item.id);
     setHightLight(slicedIds);
   };
 
