@@ -111,7 +111,6 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
     addRow,
     showCloseNumber,
     isIncludedCell,
-    hideCloseNumber,
   };
 
   return (
