@@ -21,3 +21,7 @@ td {
 table, th, td {
   border: 1px solid rgb(23, 23, 23)
 }
+
+.active {
+  background-color: yellow;
+}

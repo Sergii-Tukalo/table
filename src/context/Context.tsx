@@ -22,7 +22,9 @@ export type TableContextType = {
   createItems: (count: number, newId?: number) => Cell[];
   setItems: Dispatch<SetStateAction<Cell[]>>;
   setShowTable: Dispatch<SetStateAction<boolean>>;
+  showCloseNumber: Function;
   showTable: boolean;
+  isIncludedCell: (id: number) => boolean;
 };
 
 const TableContext = createContext<TableContextType>({} as TableContextType);
@@ -31,6 +33,8 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
   let [rowNumber, setRowNumber] = useState<number>(5);
   let [colNumber, setColNumber] = useState<number>(5);
   let [showTable, setShowTable] = useState(false);
+
+  let [hightLight, setHightLight] = useState<number[]>([]);
 
   const cellsAmount = Number(colNumber) * Number(rowNumber);
 
@@ -41,6 +45,21 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
         amount: randomNumber(),
       };
     });
+
+  const showCloseNumber = (cell: Cell) => {
+    const copy = [...items];
+    const sortedCells = copy.sort((a, b) => {
+      return (
+        Math.abs(cell.amount - a.amount) - Math.abs(cell.amount - b.amount)
+      );
+    });
+    const slicedIds = sortedCells.slice(1, 5).map((item) => item.id);
+    setHightLight(slicedIds);
+  };
+
+  const isIncludedCell = (id: number) => {
+    return hightLight.includes(id);
+  };
 
   const [items, setItems] = useState<Cell[]>(createItems(cellsAmount));
 
@@ -89,6 +108,8 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
     setItems,
     removeRow,
     addRow,
+    showCloseNumber,
+    isIncludedCell,
   };
 
   return (

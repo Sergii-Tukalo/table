@@ -13,13 +13,13 @@ export const RowAmountCell = ({
   showPercent,
   rowSum,
 }: RowAmountCellProps) => {
-  const { increase } = useTableData();
+  const { increase, showCloseNumber, isIncludedCell } = useTableData();
   const percent = Math.floor(fixedNumber(cell.amount / rowSum, 2) * 100);
 
   const style = {
     background: showPercent
-      ? `linear-gradient(0deg, rgba(255,0,0,1) ${percent}%, rgba(255,255,255,1) ${percent}%, rgba(255,255,255,1) 100%)`
-      : 'transparent',
+      ? `linear-gradient(0deg, rgba(0,0,255,1) ${percent}%, rgba(255,255,255,1) ${percent}%, rgba(255,255,255,1) 100%)`
+      : '',
     cursor: 'pointer',
   };
 
@@ -27,6 +27,8 @@ export const RowAmountCell = ({
     <td
       onClick={() => increase(cell.id)}
       style={style}
+      onMouseEnter={() => showCloseNumber(cell)}
+      className={isIncludedCell(cell.id) ? 'active' : ''}
     >
       {showPercent ? +percent + '%' : cell.amount}
     </td>
