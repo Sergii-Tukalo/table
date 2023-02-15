@@ -34,7 +34,6 @@ export const Form = () => {
 
   const getXNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (Number(e.target.value) > cellsAmount) {
-      console.log(showHightLightValidator);
       return setShowHightLightValidator(true);
     } else {
       setShowHightLightValidator(false);

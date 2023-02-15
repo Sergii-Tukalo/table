@@ -41,7 +41,6 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
   let [showHightLightValidator, setShowHightLightValidator] = useState(false);
 
   let [hightLight, setHightLight] = useState<number[]>([]);
-  console.log(hightLight);
 
   const cellsAmount = Number(colNumber) * Number(rowNumber);
 
@@ -73,7 +72,6 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
 
   const removeRow = (id: number) => {
     const index = items.findIndex((item) => item.id === id);
-    console.log(colNumber, rowNumber);
 
     setItems([
       ...items.slice(0, index),
@@ -97,9 +95,7 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
   const addRow = () => {
     const lastItemsId = items[items.length - 1].id + 1;
     setItems([...items, ...createItems(colNumber, lastItemsId)]);
-    console.log(colNumber, rowNumber);
     setRowNumber((rowNumber += 1));
-    console.log(colNumber, rowNumber);
   };
 
   const value = {
