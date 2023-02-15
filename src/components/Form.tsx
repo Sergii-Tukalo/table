@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { FormEvent, MouseEvent } from 'react';
 import { useTableData } from '../context/Context';
 
 export const Form = () => {
@@ -7,28 +7,53 @@ export const Form = () => {
     setColNumber,
     createItems,
     cellsAmount,
-    items,
     setItems,
     setShowTable,
+    setXHightLight,
+    showHightLightValidator,
+    setShowHightLightValidator,
   } = useTableData();
 
   const getColNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    return setColNumber(Number(e.target.value));
+    if (Number(e.target.value) < 100) {
+      setShowHightLightValidator(false);
+      return setColNumber(Number(e.target.value));
+    } else {
+      return setShowHightLightValidator(true);
+    }
   };
+
   const getRowNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    return setRowNumber(Number(e.target.value));
+    if (Number(e.target.value) < 100) {
+      setShowHightLightValidator(false);
+      return setRowNumber(Number(e.target.value));
+    } else {
+      return setShowHightLightValidator(true);
+    }
   };
-  const submitColRow = (e: MouseEvent<HTMLButtonElement>) => {
+
+  const getXNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (Number(e.target.value) > cellsAmount) {
+      console.log(showHightLightValidator);
+      return setShowHightLightValidator(true);
+    } else {
+      setShowHightLightValidator(false);
+      return setXHightLight(Number(e.target.value));
+    }
+  };
+
+  const validationForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     setItems(createItems(cellsAmount));
     setShowTable(true);
-    return items;
   };
 
   return (
     <form
       className="form"
       action="#"
+      onSubmit={validationForm}
     >
       <label htmlFor="columns">
         Please enter how many columns should be in the table
@@ -56,12 +81,22 @@ export const Form = () => {
         required
         onChange={getRowNumber}
       />
-      <button
-        onClick={submitColRow}
-        type="submit"
-      >
-        submit
-      </button>
+      <label htmlFor="x">Please enter X</label>
+      <input
+        className="form__input"
+        type="number"
+        id="x"
+        min="1"
+        max={cellsAmount}
+        required
+        onChange={getXNumber}
+      />
+      {showHightLightValidator ? (
+        <span style={{ color: 'red' }}>some value is incorrect</span>
+      ) : (
+        ''
+      )}
+      <button type="submit">submit</button>
     </form>
   );
 };

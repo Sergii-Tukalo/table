@@ -22,9 +22,12 @@ export type TableContextType = {
   createItems: (count: number, newId?: number) => Cell[];
   setItems: Dispatch<SetStateAction<Cell[]>>;
   setShowTable: Dispatch<SetStateAction<boolean>>;
+  setShowHightLightValidator: Dispatch<SetStateAction<boolean>>;
   showCloseNumber: (cell: Cell) => void;
   showTable: boolean;
   isIncludedCell: (id: number) => boolean;
+  setXHightLight: Function;
+  showHightLightValidator: boolean;
 };
 
 const TableContext = createContext<TableContextType>({} as TableContextType);
@@ -34,7 +37,11 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
   let [colNumber, setColNumber] = useState<number>(5);
   let [showTable, setShowTable] = useState(false);
 
+  let [xHightLight, setXHightLight] = useState(1);
+  let [showHightLightValidator, setShowHightLightValidator] = useState(false);
+
   let [hightLight, setHightLight] = useState<number[]>([]);
+  console.log(hightLight);
 
   const cellsAmount = Number(colNumber) * Number(rowNumber);
 
@@ -53,7 +60,8 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
         Math.abs(cell.amount - a.amount) - Math.abs(cell.amount - b.amount)
       );
     });
-    const slicedIds = sortedCells.slice(0, 5).map((item) => item.id);
+
+    const slicedIds = sortedCells.slice(0, xHightLight).map((item) => item.id);
     setHightLight(slicedIds);
   };
 
@@ -100,6 +108,8 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
     rowNumber,
     colNumber,
     showTable,
+    showHightLightValidator,
+    setShowHightLightValidator,
     setShowTable,
     increase,
     createItems,
@@ -110,6 +120,7 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
     addRow,
     showCloseNumber,
     isIncludedCell,
+    setXHightLight,
   };
 
   return (
