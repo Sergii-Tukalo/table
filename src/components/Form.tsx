@@ -15,7 +15,7 @@ export const Form = () => {
   } = useTableData();
 
   const getColNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (Number(e.target.value) < 100) {
+    if (Number(e.target.value) <= 100) {
       setShowHightLightValidator(false);
       return setColNumber(Number(e.target.value));
     } else {
@@ -24,7 +24,7 @@ export const Form = () => {
   };
 
   const getRowNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (Number(e.target.value) < 100) {
+    if (Number(e.target.value) <= 100) {
       setShowHightLightValidator(false);
       return setRowNumber(Number(e.target.value));
     } else {
