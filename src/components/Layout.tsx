@@ -6,10 +6,10 @@ import { RowAverage } from './RowAverage';
 export const Layout = () => {
   const { items, rowNumber, colNumber, addRow, showTable } = useTableData();
 
-  let colNumberArr = Array.from({ length: colNumber }, (_, i) => {
+  let colNumberArr: number[] = Array.from({ length: colNumber }, (_, i) => {
     return i + 1;
   });
-  let rowNumberArr = Array.from({ length: rowNumber }, (_, i) => {
+  let rowNumberArr: number[] = Array.from({ length: rowNumber }, (_, i) => {
     return i + 1;
   });
 

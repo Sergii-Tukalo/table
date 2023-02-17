@@ -44,7 +44,7 @@ export const TableContextProvider = ({ children }: { children: ReactNode }) => {
 
   const cellsAmount = Number(colNumber) * Number(rowNumber);
 
-  const createItems = (count: number, newId = 1) =>
+  const createItems = (count: number, newId = 1): Cell[] =>
     Array.from({ length: count }, (_, i) => {
       return {
         id: i + newId,

@@ -12,7 +12,7 @@ export const RowAmountCell = ({
   cell,
   showPercent,
   rowSum,
-}: RowAmountCellProps) => {
+}: RowAmountCellProps): JSX.Element => {
   const { increase, showCloseNumber, isIncludedCell } = useTableData();
   const percent = Math.floor(fixedNumber(cell.amount / rowSum, 2) * 100);
 
